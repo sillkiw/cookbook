@@ -1,0 +1,20 @@
+name: Check Recept File
+
+on: [push] # Запуск при каждом push
+
+jobs:
+  check_file:
+    runs-on: ubuntu-latest # Используем сервер на Ubuntu
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Обязательный шаг: скачиваем код репозитория
+
+      - name: Run check script
+        run: |
+          echo "Запускаем простую проверку..."
+          if [ -f "recept_blinov.txt" ]; then 
+            echo "Файл recept_blinov.txt существует. Ура!"
+          else 
+            echo "Файл recept_blinov.txt не найден!"
+            exit 1
+          fi
